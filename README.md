@@ -89,16 +89,6 @@ A comprehensive plugin for Enigma2-based receivers to watch RSI Play TV content,
 
 ## 📦 Installation
 
-### Manual Installation
-
-```bash
-# Copy plugin to Enigma2
-scp -r RSILive/ root@<decoder_ip>:/usr/lib/enigma2/python/Plugins/Extensions/
-
-# Restart Enigma2
-init 4 && init 3
-```
-
 ### Via Telnet/Wget (Recommended)
 
 ```bash
@@ -110,7 +100,10 @@ wget -q --no-check-certificate https://raw.githubusercontent.com/OwnerPlugins/RS
 Ensure `yt-dlp` is installed:
 
 ```bash
-opkg install yt-dlp
+opkg install enigma2-plugin-extensions-ytdlpwrapper
+opkg install enigma2-plugin-extensions-ytdlwrapper
+opkg install python3-yt-dlp
+opkg install python3-youtube-dl
 ```
 
 If not available, install manually:
