@@ -1,0 +1,19 @@
+#!/bin/sh
+# ============================================================
+# RSILive prerm - Remove plugin files
+# ============================================================
+
+echo "============================================================"
+echo "  RSILive - Removing plugin..."
+echo "============================================================"
+
+EXTDIR="/usr/lib/enigma2/python/Plugins/Extensions/RSILive/"
+if [ -d "$EXTDIR" ]; then
+    rm -rf "$EXTDIR" > /dev/null 2>&1
+    echo "[OK] Plugin removed"
+else
+    echo "[INFO] Plugin not found"
+fi
+
+echo "============================================================"
+exit 0

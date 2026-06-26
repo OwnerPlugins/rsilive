@@ -1,4 +1,5 @@
 #!/bin/bash
+## setup command=wget -q --no-check-certificate https://raw.githubusercontent.com/OwnerPlugins/rsilive/main/installer.sh -O - | /bin/bash
 
 version='1.3'
 changelog='\nAdd Live Upgrade\nFix screen'
@@ -88,10 +89,31 @@ install_pkg() {
     fi
 }
 
+# ============================================================
+# INSTALL YT-DLP DEPENDENCIES
+# ============================================================
+
+echo "============================================================"
+echo "  Installing yt-dlp dependencies..."
+echo "============================================================"
+
+install_pkg "python3-yt-dlp"
+install_pkg "python3-youtube-dl"
+install_pkg "enigma2-plugin-extensions-ytdlpwrapper"
+install_pkg "enigma2-plugin-extensions-ytdlwrapper"
+
+# ============================================================
+# INSTALL PYTHON DEPENDENCIES
+# ============================================================
+
 if [ "$PYTHON" = "PY3" ]; then
     install_pkg "$Packagesix"
 fi
 install_pkg "$Packagerequests"
+
+# ============================================================
+# INSTALL MULTIMEDIA PACKAGES
+# ============================================================
 
 if [ "$OSTYPE" = "OE" ]; then
     echo "Installing additional multimedia packages..."

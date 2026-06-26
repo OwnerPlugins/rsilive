@@ -1,6 +1,85 @@
 #!/bin/sh
-echo "****************************************"
-echo "*  Enjoy our plugin                    *"
-echo "****************************************"
-echo " Remember Restarting Enigma2 to load..."
+# ============================================================
+# RSILive postinst - Install yt-dlp dependencies
+# ============================================================
+
+echo "============================================================"
+echo "  RSILive - Installing dependencies..."
+echo "============================================================"
+
+# Detects OS type
+if [ -f /var/lib/dpkg/status ]; then
+    OSTYPE="DreamOs"
+    INSTALL_CMD="apt-get install -y"
+    UPDATE_CMD="apt-get update"
+elif [ -f /etc/opkg/opkg.conf ] || [ -f /var/lib/opkg/status ]; then
+    OSTYPE="OE"
+    INSTALL_CMD="opkg install"
+    UPDATE_CMD="opkg update"
+else
+    OSTYPE="Unknown"
+    INSTALL_CMD=""
+    UPDATE_CMD=""
+fi
+
+# Detects Python version
+if python --version 2>&1 | grep -q '^Python 3\.'; then
+    PYTHON="PY3"
+else
+    PYTHON="PY2"
+fi
+
+# Install package function
+install_pkg() {
+    local pkg=$1
+    echo "[INSTALL] Installing $pkg..."
+    case "$OSTYPE" in
+        "DreamOs")
+            $UPDATE_CMD && $INSTALL_CMD "$pkg" || echo "[WARN] Could not install $pkg"
+            ;;
+        "OE")
+            $UPDATE_CMD && $INSTALL_CMD "$pkg" || echo "[WARN] Could not install $pkg"
+            ;;
+        *)
+            echo "[WARN] Cannot install $pkg on $OSTYPE"
+            ;;
+    esac
+}
+
+# ============================================================
+# INSTALL YT-DLP AND WRAPPERS
+# ============================================================
+
+install_pkg "python3-yt-dlp"
+install_pkg "python3-youtube-dl"
+install_pkg "enigma2-plugin-extensions-ytdlpwrapper"
+install_pkg "enigma2-plugin-extensions-ytdlwrapper"
+
+# ============================================================
+# INSTALL PYTHON DEPENDENCIES
+# ============================================================
+
+if [ "$PYTHON" = "PY3" ]; then
+    install_pkg "python3-six"
+    install_pkg "python3-requests"
+else
+    install_pkg "python-six"
+    install_pkg "python-requests"
+fi
+
+# ============================================================
+# INSTALL MULTIMEDIA PACKAGES (OE only)
+# ============================================================
+
+if [ "$OSTYPE" = "OE" ]; then
+    install_pkg "ffmpeg"
+    install_pkg "gstplayer"
+    install_pkg "exteplayer3"
+    install_pkg "enigma2-plugin-systemplugins-serviceapp"
+fi
+
+echo "============================================================"
+echo "  RSILive dependencies installed successfully"
+echo "============================================================"
+
 exit 0
