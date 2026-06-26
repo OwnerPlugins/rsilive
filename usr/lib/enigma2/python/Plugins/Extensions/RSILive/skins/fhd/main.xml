@@ -1,0 +1,11 @@
+<screen name="main" position="0,0" size="1920,1080" title="RSI Play TV">
+    <widget name="title" position="50,50" size="1089,60" font="Regular;48" foregroundColor="#ffffff"/>
+    <widget name="list" position="50,150" size="777,800" itemHeight="60" font="Regular;32" foregroundColor="#ffffff" scrollbarWidth="10" scrollbarMode="showOnDemand" backgroundColor="#000000" transparent="1"/>
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/RSILive/images/fanart.png" position="1173,59" size="370,370" scale="1" zPosition="5" alphatest="blend"/>
+    <widget source="session.VideoPicture" render="Pig" position="1083,445" zPosition="20" size="615,350" backgroundColor="transparent" transparent="0" cornerRadius="14"/>
+    <widget name="version_label" position="1320,820" size="565,55" font="Liberation; 38" foregroundColor="#53a9ff" backgroundColor="#000000" transparent="1" valign="center" zPosition="10" halign="left"/>
+    <widget name="author_label" position="1320,882" size="565,145" font="Regular; 24" foregroundColor="#53a9ff" backgroundColor="#000000" transparent="1" valign="center" zPosition="10" halign="left"/>
+    <ePixmap position="882,833" size="372,164" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca1/buttons/offer_coffee.png" zPosition="10" scale="1"/>
+    <ePixmap position="1278,835" size="30,30" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca1/buttons/icon.png" zPosition="10" scale="1"/>
+    <ePixmap position="1278,925" size="30,30" alphatest="blend" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca1/buttons/icon.png" zPosition="10" scale="1"/>
+</screen>
