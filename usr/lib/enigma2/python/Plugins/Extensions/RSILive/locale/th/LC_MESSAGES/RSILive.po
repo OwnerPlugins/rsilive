@@ -20,7 +20,7 @@ msgid "If you like what I do you\n"
 msgstr "ถ้าคุณชอบสิ่งที่ฉันทำคุณ\n"
 
 msgid "can contribute with a coffee\n"
-msgstr ""
+msgstr "สามารถบริจาคกาแฟได้\n"
 
 msgid "scan the qr code and donate a coffe"
 msgstr "สแกนรหัส QR และบริจาคกาแฟ"
