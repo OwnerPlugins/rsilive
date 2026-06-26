@@ -84,15 +84,17 @@ def load_skin(screen_name):
         res = get_resolution_type()
         skin_path = f"{PLUGIN_PATH}/skins/{res}/{screen_name}.xml"
         print("[RSILive DEBUG] Looking for skin: {}".format(skin_path))
-        
+
         if not os.path.exists(skin_path):
             skin_path = f"{PLUGIN_PATH}/skins/hd/{screen_name}.xml"
             print("[RSILive DEBUG] Fallback to: {}".format(skin_path))
-        
+
         if os.path.exists(skin_path):
             with open(skin_path, "r") as f:
                 content = f.read()
-                print("[RSILive DEBUG] Skin loaded, size: {} bytes".format(len(content)))
+                print(
+                    "[RSILive DEBUG] Skin loaded, size: {} bytes".format(
+                        len(content)))
                 return content
         else:
             print("[RSILive DEBUG] Skin file NOT FOUND")

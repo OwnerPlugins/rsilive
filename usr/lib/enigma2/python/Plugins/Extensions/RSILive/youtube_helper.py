@@ -38,7 +38,7 @@ FUNCTIONS:
 
 USAGE:
     from .helpers import PLUGIN_PATH, load_skin, find_executable
-    
+
     skin = load_skin("main")
     ytdlp = find_executable("yt-dlp")
     cache = get_cache_path("videos.json")
@@ -88,7 +88,8 @@ def find_ytdlp():
         if exists(path):
             try:
                 cmd = [path, "--version"]
-                result = subprocess.run(cmd, capture_output=True, text=True, timeout=10)
+                result = subprocess.run(
+                    cmd, capture_output=True, text=True, timeout=10)
                 if result.returncode == 0:
                     print("[RSILive] Found yt-dlp at: {}".format(path))
                     return path
@@ -107,7 +108,8 @@ def get_stream_with_ytdlp(ytdlp_path, video_id):
     # Format options in order of preference
     # MP4 formats are most compatible with Enigma2
     format_options = [
-        ["-g", "-f", "18"],                             # MP4 360p (most compatible)
+        # MP4 360p (most compatible)
+        ["-g", "-f", "18"],
         ["-g", "-f", "best[ext=mp4]"],                  # Best MP4
         ["-g", "-f", "22/37"],                          # MP4 720p/1080p
         ["-g", "-f", "best[protocol!=m3u8_native]"],    # Avoid HLS
@@ -128,7 +130,8 @@ def get_stream_with_ytdlp(ytdlp_path, video_id):
 
             if result.returncode == 0:
                 stream_url = result.stdout.strip()
-                if stream_url and stream_url.startswith(("http://", "https://")):
+                if stream_url and stream_url.startswith(
+                        ("http://", "https://")):
                     print("[RSILive] Stream found: {}".format(stream_url[:80]))
                     return stream_url
             else:

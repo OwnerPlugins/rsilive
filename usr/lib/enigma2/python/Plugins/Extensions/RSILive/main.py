@@ -86,7 +86,9 @@ class RsiMain(Screen):
 
     def push_level(self, items, title=None):
         """Push a new level onto the navigation stack"""
-        self.nav_stack.append((self["list"].getList(), self["title"].getText()))
+        self.nav_stack.append(
+            (self["list"].getList(),
+             self["title"].getText()))
         self["list"].setList(items)
         if title:
             self["title"].setText(title)
@@ -154,7 +156,8 @@ class RsiMain(Screen):
         # Extract channel data (data_dict) from each item
         channel_list = [item[1] for item in full_list]
 
-        print(f"[RSILive] Playing video {current_index + 1}/{len(channel_list)}")
+        print(
+            f"[RSILive] Playing video {current_index + 1}/{len(channel_list)}")
         self.session.open(RsiPlayer, channel_list, current_index)
 
     def open_category(self, category_name):
@@ -181,7 +184,8 @@ class RsiMain(Screen):
                     if 'url' in channel:
                         url = channel['url']
                     elif 'channel' in channel:
-                        url = f"https://www.youtube.com/channel/{channel['channel']}"
+                        url = f"https://www.youtube.com/channel/{
+                            channel['channel']}"
                     else:
                         continue
                     channels.append({
@@ -255,14 +259,17 @@ class RsiMain(Screen):
                     "--print", "url",
                     channel_url
                 ]
-                print(f"[RSILive] Fetching batch {page + 1} (videos {start + 1}-{start + batch_size})")
+                print(
+                    f"[RSILive] Fetching batch {page + 1} (videos {start + 1}-{start + batch_size})")
 
-                url_result = subprocess.run(url_cmd, capture_output=True, text=True, timeout=30)
+                url_result = subprocess.run(
+                    url_cmd, capture_output=True, text=True, timeout=30)
                 if url_result.returncode != 0:
                     print(f"[RSILive] yt-dlp error: {url_result.stderr[:100]}")
                     break
 
-                urls = [line.strip() for line in url_result.stdout.split('\n') if line.strip().startswith('http')]
+                urls = [line.strip() for line in url_result.stdout.split(
+                    '\n') if line.strip().startswith('http')]
                 if not urls:
                     print("[RSILive] No URLs in this batch, stopping")
                     break
@@ -276,14 +283,18 @@ class RsiMain(Screen):
                     "--print", "title",
                     channel_url
                 ]
-                title_result = subprocess.run(title_cmd, capture_output=True, text=True, timeout=30)
-                titles = [line.strip() for line in title_result.stdout.split('\n') if line.strip()]
+                title_result = subprocess.run(
+                    title_cmd, capture_output=True, text=True, timeout=30)
+                titles = [
+                    line.strip() for line in title_result.stdout.split('\n') if line.strip()]
 
                 # 3. Combine
                 batch_videos = []
                 for i, url in enumerate(urls):
-                    title = titles[i] if i < len(titles) else f"Video {start + i + 1}"
-                    batch_videos.append((title, {'name': title, 'stream_url': url}))
+                    title = titles[i] if i < len(
+                        titles) else f"Video {start + i + 1}"
+                    batch_videos.append(
+                        (title, {'name': title, 'stream_url': url}))
 
                 if not batch_videos:
                     break

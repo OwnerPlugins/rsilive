@@ -156,7 +156,8 @@ class RsiInfoBarShowHide():
         # Timer to hide overlays after 5 seconds
         self.hideTimer = eTimer()
         try:
-            self.hideTimer_conn = self.hideTimer.timeout.connect(self.doTimerHide)
+            self.hideTimer_conn = self.hideTimer.timeout.connect(
+                self.doTimerHide)
         except BaseException:
             self.hideTimer.callback.append(self.doTimerHide)
         self.hideTimer.start(5000, True)
@@ -166,7 +167,8 @@ class RsiInfoBarShowHide():
 
     def get_current_channel_info(self):
         """Override for RsiInfoBarShowHide"""
-        if self.channel_list and 0 <= self.current_index < len(self.channel_list):
+        if self.channel_list and 0 <= self.current_index < len(
+                self.channel_list):
             channel = self.channel_list[self.current_index]
             name = channel.get('name', 'N/A')
             index = self.current_index + 1
@@ -292,7 +294,8 @@ class RsiPlayer(
         Screen.__init__(self, session)
         self.session = session
         self.channel_list = channel_list if channel_list else []
-        print("[RSILive DEBUG] self.channel_list length: {}".format(len(self.channel_list)))
+        print("[RSILive DEBUG] self.channel_list length: {}".format(
+            len(self.channel_list)))
         self.skinName = 'MoviePlayer'
 
         self.api = RSIApi()
@@ -366,7 +369,8 @@ class RsiPlayer(
 
     def get_current_channel_info(self):
         """Override for RsiInfoBarShowHide"""
-        if self.channel_list and 0 <= self.current_index < len(self.channel_list):
+        if self.channel_list and 0 <= self.current_index < len(
+                self.channel_list):
             channel = self.channel_list[self.current_index]
             name = channel.get('name', 'N/A')
             index = self.current_index + 1
@@ -380,14 +384,18 @@ class RsiPlayer(
             return
 
         current_channel = self.channel_list[self.current_index]
-        stream_url = current_channel.get('stream_url') or current_channel.get('url')
+        stream_url = current_channel.get(
+            'stream_url') or current_channel.get('url')
         channel_name = current_channel.get('name', 'RSI Channel')
 
         if not stream_url:
-            print("[RSILive] No stream URL for channel {}".format(self.current_index))
+            print(
+                "[RSILive] No stream URL for channel {}".format(
+                    self.current_index))
             return
 
-        print("[RSILive] Playing: {} - {}".format(channel_name, stream_url[:80] + "..."))
+        print("[RSILive] Playing: {} - {}".format(channel_name,
+              stream_url[:80] + "..."))
 
         # YouTube detection
         if "youtube.com" in stream_url or "youtu.be" in stream_url:
@@ -402,7 +410,8 @@ class RsiPlayer(
                 return
 
         # Ensure stream_url is valid
-        if not stream_url or not stream_url.startswith(("http://", "https://")):
+        if not stream_url or not stream_url.startswith(
+                ("http://", "https://")):
             print("[RSILive] Invalid stream URL: {}".format(stream_url))
             self.show_error_message("Invalid stream URL")
             return
@@ -421,7 +430,8 @@ class RsiPlayer(
             url_encoded = stream_url.replace(":", "%3a")
             name_encoded = channel_name.replace(":", "%3a")
 
-            ref_str = "{}:0:0:0:0:0:0:0:0:0:{}:{}".format(service_type, url_encoded, name_encoded)
+            ref_str = "{}:0:0:0:0:0:0:0:0:0:{}:{}".format(
+                service_type, url_encoded, name_encoded)
             print("[RSILive DEBUG] Service ref: {}".format(ref_str[:200]))
 
             sref = eServiceReference(ref_str)
@@ -485,16 +495,19 @@ class RsiPlayer(
 
     def show_channel_info(self):
         """Display info for the current channel"""
-        if self.channel_list and 0 <= self.current_index < len(self.channel_list):
+        if self.channel_list and 0 <= self.current_index < len(
+                self.channel_list):
             channel = self.channel_list[self.current_index]
             info = "Channel: {}\n".format(channel.get('name', 'N/A'))
-            info += "Index: {}/{}\n".format(self.current_index + 1, self.itemscount)
+            info += "Index: {}/{}\n".format(
+                self.current_index + 1, self.itemscount)
             if channel.get('country'):
                 info += "Country: {}\n".format(channel.get('country'))
             if channel.get('language'):
                 info += "Language: {}\n".format(channel.get('language'))
             url = channel.get('stream_url') or channel.get('url', 'N/A')
-            info += "URL: {}".format(url[:80] + "..." if len(url) > 80 else url)
+            info += "URL: {}".format(url[:80] +
+                                     "..." if len(url) > 80 else url)
             self.session.open(MessageBox, info, MessageBox.TYPE_INFO)
 
     def show_error_message(self, message):

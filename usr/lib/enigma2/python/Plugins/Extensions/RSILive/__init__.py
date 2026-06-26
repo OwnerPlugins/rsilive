@@ -67,7 +67,11 @@ def paypal():
 def localeInit():
     lang = language.getLanguage()[:2]  # es. "it", "en"
     os.environ["LANGUAGE"] = lang
-    gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
+    gettext.bindtextdomain(
+        PluginLanguageDomain,
+        resolveFilename(
+            SCOPE_PLUGINS,
+            PluginLanguagePath))
 
 
 def _(txt):
