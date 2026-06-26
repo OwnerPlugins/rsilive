@@ -1,0 +1,26 @@
+# RSILive translations
+# Copyright (C) 2025 Lululla Team
+# This file is distributed under the same license as the Lululla package.
+# [lululla] <ekekaz@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: RSILive\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2026-06-26 09:16+0000\n"
+"Last-Translator:  <EMAIL@ADDRESS>\n"
+"Language-Team: Malayalam <smc-discuss@googlegroups.com>\n"
+"Language: ml\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "If you like what I do you\n"
+msgstr "ഞാൻ ചെയ്യുന്നത് നിങ്ങൾക്ക് ഇഷ്ടമാണെങ്കിൽ\n"
+
+msgid "can contribute with a coffee\n"
+msgstr "ഒരു കോഫി ഉപയോഗിച്ച് സംഭാവന ചെയ്യാം\n"
+
+msgid "scan the qr code and donate a coffe"
+msgstr "ക്യുആർ കോഡ് സ്കാൻ ചെയ്ത് ഒരു കോഫി സംഭാവന ചെയ്യുക"
