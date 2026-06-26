@@ -96,7 +96,7 @@ else:  # HD (1280x720) or lower
 
 
 class RsiInfoBarShowHide():
-    """InfoBar show/hide control with overlay management"""
+    """InfoBar show/hide control with top overlay management"""
     STATE_HIDDEN = 0
     STATE_HIDING = 1
     STATE_SHOWING = 2
@@ -117,9 +117,6 @@ class RsiInfoBarShowHide():
                 iPlayableService.evStart: self.serviceStarted})
         self.__state = self.STATE_SHOWN
         self.__locked = 0
-
-        # Get screen width for responsive overlay
-        # screen_width = getDesktop(0).size().width()
 
         # ----- TOP OVERLAY: Controls help -----
         self.helpOverlay = Label("")
@@ -156,28 +153,26 @@ class RsiInfoBarShowHide():
         # Timer to hide overlays after 5 seconds
         self.hideTimer = eTimer()
         try:
-            self.hideTimer_conn = self.hideTimer.timeout.connect(
-                self.doTimerHide)
+            self.hideTimer.timeout.connect(self.doTimerHide)
         except BaseException:
             self.hideTimer.callback.append(self.doTimerHide)
-        self.hideTimer.start(5000, True)
 
         self.onShow.append(self.__onShow)
         self.onHide.append(self.__onHide)
 
     def get_current_channel_info(self):
-        """Override for RsiInfoBarShowHide"""
-        if self.channel_list and 0 <= self.current_index < len(
-                self.channel_list):
-            channel = self.channel_list[self.current_index]
-            name = channel.get('name', 'N/A')
-            index = self.current_index + 1
-            total = len(self.channel_list)
-            return f"▶ {name} [{index}/{total}]"
+        """Override in child class"""
+        if hasattr(self, 'channel_list') and hasattr(self, 'current_index'):
+            if self.channel_list and 0 <= self.current_index < len(self.channel_list):
+                channel = self.channel_list[self.current_index]
+                name = channel.get('name', 'N/A')
+                index = self.current_index + 1
+                total = len(self.channel_list)
+                return f"▶ {name} [{index}/{total}]"
         return "RSI Live Player"
 
     def show_overlays(self):
-        """Show both overlays (controls + channel info)"""
+        """Show both overlays and start hide timer"""
         try:
             controls = "OK = Info | CH+/CH- = Next/Prev | STOP = Exit | by Lululla"
             info = self.get_current_channel_info()
@@ -193,18 +188,18 @@ class RsiInfoBarShowHide():
             print(f"[RSILive] Error showing overlays: {e}")
 
     def hide_overlays(self):
-        """Hide both overlays"""
+        """Hide both overlays and stop timer"""
+        self.hideTimer.stop()
         if self["helpOverlay"].visible:
-            self.hideTimer.stop()
             self["helpOverlay"].hide()
             self["infoOverlay"].hide()
 
     def OkPressed(self):
-        if self.__state == self.STATE_SHOWN:
-            if self["helpOverlay"].visible:
-                self.hide_overlays()
-            else:
-                self.show_overlays()
+        """Toggle overlays on OK press"""
+        if self["helpOverlay"].visible:
+            self.hide_overlays()
+        else:
+            self.show_overlays()
         self.toggleShow()
 
     def __onShow(self):
@@ -222,8 +217,7 @@ class RsiInfoBarShowHide():
     def doHide(self):
         self.hideTimer.stop()
         self.hide()
-        if self["helpOverlay"].visible:
-            self.hide_overlays()
+        self.hide_overlays()
         self.startHideTimer()
 
     def serviceStarted(self):
@@ -240,14 +234,16 @@ class RsiInfoBarShowHide():
         self.hideTimer.stop()
         if self.__state == self.STATE_SHOWN:
             self.hide()
-            if self["helpOverlay"].visible:
-                self.hide_overlays()
+            self.hide_overlays()
 
     def toggleShow(self):
         if not self.skipToggleShow:
             if self.__state == self.STATE_HIDDEN:
                 self.doShow()
                 self.show_overlays()
+            else:
+                self.doHide()
+                self.hide_overlays()
         else:
             self.skipToggleShow = False
 
