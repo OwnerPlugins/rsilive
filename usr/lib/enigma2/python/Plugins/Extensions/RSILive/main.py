@@ -184,8 +184,7 @@ class RsiMain(Screen):
                     if 'url' in channel:
                         url = channel['url']
                     elif 'channel' in channel:
-                        url = f"https://www.youtube.com/channel/{
-                            channel['channel']}"
+                        url = f"https://www.youtube.com/channel/{channel['channel']}"
                     else:
                         continue
                     channels.append({
