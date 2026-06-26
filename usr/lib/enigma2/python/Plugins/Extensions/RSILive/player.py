@@ -163,8 +163,7 @@ class RsiInfoBarShowHide():
     def get_current_channel_info(self):
         """Override in child class"""
         if hasattr(self, 'channel_list') and hasattr(self, 'current_index'):
-            if self.channel_list and 0 <= self.current_index < len(
-                    self.channel_list):
+            if self.channel_list and 0 <= self.current_index < len(self.channel_list):
                 channel = self.channel_list[self.current_index]
                 name = channel.get('name', 'N/A')
                 index = self.current_index + 1
