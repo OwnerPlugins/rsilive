@@ -138,24 +138,47 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# ============================================================
+# INSTALL PLUGIN FILES - CASE INSENSITIVE
+# ============================================================
 echo "Installing plugin files..."
 mkdir -p "$PLUGINPATH"
 
-if [ -d "$TMPPATH/RSILive-main/usr/lib/enigma2/python/Plugins/Extensions/RSILive" ]; then
-    cp -r "$TMPPATH/RSILive-main/usr/lib/enigma2/python/Plugins/Extensions/RSILive"/* "$PLUGINPATH/" 2>/dev/null
-    echo "Copied from standard plugin directory"
-elif [ -d "$TMPPATH/RSILive-main/usr/lib64/enigma2/python/Plugins/Extensions/RSILive" ]; then
-    cp -r "$TMPPATH/RSILive-main/usr/lib64/enigma2/python/Plugins/Extensions/RSILive"/* "$PLUGINPATH/" 2>/dev/null
-    echo "Copied from lib64 plugin directory"
-elif [ -d "$TMPPATH/RSILive-main/usr" ]; then
-    cp -r "$TMPPATH/RSILive-main/usr"/* /usr/ 2>/dev/null
-    echo "Copied entire usr structure"
+# Cerca la cartella RSILive/rsilive ovunque nell'estratto
+SOURCE_DIR=$(find "$TMPPATH" -type d -iname "rsilive" 2>/dev/null | head -1)
+
+if [ -n "$SOURCE_DIR" ]; then
+    echo "Found plugin directory: $SOURCE_DIR"
+    cp -r "$SOURCE_DIR"/* "$PLUGINPATH/" 2>/dev/null
+    echo "Copied from $SOURCE_DIR"
 else
-    echo "Could not find plugin files in extracted archive"
-    echo "Available directories in tmp:"
-    find "$TMPPATH" -type d | head -10
-    cleanup
-    exit 1
+    # Fallback: cerca la struttura standard con case-insensitive
+    FOUND=0
+    for dir in "$TMPPATH"/*/usr/lib/enigma2/python/Plugins/Extensions/RSILive; do
+        if [ -d "$dir" ]; then
+            cp -r "$dir"/* "$PLUGINPATH/" 2>/dev/null
+            echo "Copied from $dir"
+            FOUND=1
+            break
+        fi
+    done
+    if [ $FOUND -eq 0 ]; then
+        for dir in "$TMPPATH"/*/usr/lib64/enigma2/python/Plugins/Extensions/RSILive; do
+            if [ -d "$dir" ]; then
+                cp -r "$dir"/* "$PLUGINPATH/" 2>/dev/null
+                echo "Copied from $dir"
+                FOUND=1
+                break
+            fi
+        done
+    fi
+    if [ $FOUND -eq 0 ]; then
+        echo "Could not find plugin files in extracted archive"
+        echo "Available directories in tmp:"
+        find "$TMPPATH" -type d | head -20
+        cleanup
+        exit 1
+    fi
 fi
 
 sync
