@@ -202,7 +202,6 @@ class RsiInfoBarShowHide():
     def OkPressed(self):
         if self.__state == self.STATE_SHOWN:
             if self["helpOverlay"].visible:
-                self.help_timer.stop()
                 self.hide_overlays()
             else:
                 self.show_overlays()
@@ -249,10 +248,6 @@ class RsiInfoBarShowHide():
             if self.__state == self.STATE_HIDDEN:
                 self.doShow()
                 self.show_overlays()
-            else:
-                self.doHide()
-                if self["helpOverlay"].visible:
-                    self.hide_overlays()
         else:
             self.skipToggleShow = False
 
