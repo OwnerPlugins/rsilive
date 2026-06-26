@@ -1,0 +1,11 @@
+Package: enigma2-plugin-extensions-rsilive
+Version: 1.0
+Section: enigma2
+Priority: optional
+Architecture: all
+Maintainer: Lululla
+Description: RSILive
+Source: enigma2-plugin-extensions-rsilive
+Homepage: https://github.com/OwnerPlugins
+License: GPL-3.0
+OE: OE-Alliance
