@@ -87,7 +87,7 @@ class RsiMain(Screen):
     def push_level(self, items, title=None):
         """Push a new level onto the navigation stack"""
         self.nav_stack.append(
-            (self["list"].getList(),
+            (self["list"].list,
              self["title"].getText()))
         self["list"].setList(items)
         if title:
@@ -141,7 +141,7 @@ class RsiMain(Screen):
 
         # --- VIDEO PLAYBACK WITH ZAPPING ---
         # Get the full list from current level
-        full_list = self["list"].getList()
+        full_list = self["list"].list
         if not full_list:
             self.session.open(RsiPlayer, [data], 0)
             return
