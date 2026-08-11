@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "If you like what I do you\n"
-msgstr "Si t'agrada el que faig, tu\n"
+msgid "If you like what I do you\\\\\\\\n"
+msgstr "Si t'agrada el que faig, tu\\\\\\\\n"
 
-msgid "can contribute with a coffee\n"
-msgstr "pot contribuir amb un cafè\n"
+msgid "can contribute with a coffee\\\\\\\\n"
+msgstr "pot contribuir amb un cafè\\\\\\\\n"
 
 msgid "scan the qr code and donate a coffe"
 msgstr "escaneja el codi qr i dona un cafè"

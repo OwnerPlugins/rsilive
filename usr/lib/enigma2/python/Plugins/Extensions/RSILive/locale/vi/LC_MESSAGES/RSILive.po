@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "If you like what I do you\n"
-msgstr "Nếu bạn thích việc tôi làm thì bạn\n"
+msgid "If you like what I do you\\\\\\\\n"
+msgstr "Nếu bạn thích việc tôi làm thì bạn\\\\\\\\n"
 
-msgid "can contribute with a coffee\n"
-msgstr "có thể đóng góp bằng một ly cà phê\n"
+msgid "can contribute with a coffee\\\\\\\\n"
+msgstr "có thể đóng góp bằng một ly cà phê\\\\\\\\n"
 
 msgid "scan the qr code and donate a coffe"
 msgstr "quét mã qr và tặng cà phê"

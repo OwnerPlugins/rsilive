@@ -4,18 +4,10 @@
 # [lululla] <ekekaz@gmail.com>, 2025.
 #
 
-
-
-
-
-
-
-
-
-msgid "If you like what I do you\n"
+msgid "If you like what I do you\\n"
 msgstr ""
 
-msgid "can contribute with a coffee\n"
+msgid "can contribute with a coffee\\n"
 msgstr ""
 
 msgid "scan the qr code and donate a coffe"
