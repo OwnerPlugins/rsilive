@@ -16,11 +16,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, fuzzy
 msgid "If you like what I do you\\\\\\\\n"
-msgstr "የማደርገውን ከወደዳችሁ\\\\\\\\n"
+msgstr "የማደርገውን ከወደዳችሁ\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n"
 
+#, fuzzy
 msgid "can contribute with a coffee\\\\\\\\n"
-msgstr "በቡና ማበርከት ይችላል\\\\\\\\n"
+msgstr "በቡና ማበርከት ይችላል\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n"
 
 msgid "scan the qr code and donate a coffe"
 msgstr "የqr ኮድ ስካን እና ኮፍያ ለግሱ"

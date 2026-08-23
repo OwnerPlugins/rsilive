@@ -17,11 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
+#, fuzzy
 msgid "If you like what I do you\\\\\\\\n"
-msgstr "Če vam je všeč, kar počnem,\\\\\\\\n"
+msgstr "Če vam je všeč, kar počnem,\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n"
 
+#, fuzzy
 msgid "can contribute with a coffee\\\\\\\\n"
-msgstr "lahko prispeva s kavo\\\\\\\\n"
+msgstr "lahko prispeva s kavo\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n"
 
 msgid "scan the qr code and donate a coffe"
 msgstr "poskenirajte qr kodo in podarite kavo"
